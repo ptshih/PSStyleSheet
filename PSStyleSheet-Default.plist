@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>exampleStyleOne</key>
+	<dict>
+		<key>fontName</key>
+		<string>HelveticaNeue-Bold</string>
+		<key>fontSize</key>
+		<integer>16</integer>
+		<key>textColor</key>
+		<string>0xefefef</string>
+		<key>highlightedTextColor</key>
+		<string>0xefefef</string>
+		<key>textAlignment</key>
+		<string>left</string>
+		<key>shadowColor</key>
+		<string>0x000000</string>
+		<key>shadowOffset</key>
+		<string>{0,1}</string>
+	</dict>
+</dict>
+</plist>
