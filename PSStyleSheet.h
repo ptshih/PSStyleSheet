@@ -3,7 +3,7 @@
 //  SevenMinuteLibrary
 //
 //  Created by Peter Shih on 8/10/11.
-//  Copyright 2011 Seven Minute Labs. All rights reserved.
+//  Copyright (c) 2011 Peter Shih.. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,6 +12,7 @@
 
 + (void)setStyleSheet:(NSString *)styleSheet;
 + (void)applyStyle:(NSString *)style forLabel:(UILabel *)label;
++ (void)applyStyle:(NSString *)style forButton:(UIButton *)button;
 
 + (UIFont *)fontForStyle:(NSString *)style;
 + (UIColor *)textColorForStyle:(NSString *)style;

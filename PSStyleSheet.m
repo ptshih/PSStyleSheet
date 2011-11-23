@@ -3,12 +3,12 @@
 //  SevenMinuteLibrary
 //
 //  Created by Peter Shih on 8/10/11.
-//  Copyright 2011 Seven Minute Labs. All rights reserved.
+//  Copyright (c) 2011 Peter Shih.. All rights reserved.
 //
 
 #import "PSStyleSheet.h"
 
-static NSDictionary *_styles = nil;
+static NSMutableDictionary *_styles = nil;
 
 @implementation PSStyleSheet
 
@@ -16,23 +16,22 @@ static NSDictionary *_styles = nil;
   NSString *styleSheetPath = [[NSBundle mainBundle] pathForResource:@"PSStyleSheet-Default" ofType:@"plist"];
   assert(styleSheetPath != nil);
   
-  NSDictionary *styleSheetDict = [NSDictionary dictionaryWithContentsOfFile:styleSheetPath];
+  NSMutableDictionary *styleSheetDict = [NSMutableDictionary dictionaryWithContentsOfFile:styleSheetPath];
   assert(styleSheetDict != nil);
   _styles = [styleSheetDict retain];
 }
 
 + (void)setStyleSheet:(NSString *)styleSheet {
-  if (_styles) [_styles release], _styles = nil;
-
   NSString *styleSheetPath = [[NSBundle mainBundle] pathForResource:styleSheet ofType:@"plist"];
   assert(styleSheetPath != nil);
   
-  NSDictionary *styleSheetDict = [NSDictionary dictionaryWithContentsOfFile:styleSheetPath];
+  NSMutableDictionary *styleSheetDict = [NSMutableDictionary dictionaryWithContentsOfFile:styleSheetPath];
   assert(styleSheetDict != nil);
-  _styles = [styleSheetDict retain];
+  
+  [_styles addEntriesFromDictionary:styleSheetDict];
 }
 
-#pragma mark - Configure Label
+#pragma mark - Applying Styles Convenience Methods
 + (void)applyStyle:(NSString *)style forLabel:(UILabel *)label {
   label.font = [PSStyleSheet fontForStyle:style];
   label.textColor = [PSStyleSheet textColorForStyle:style];
@@ -40,6 +39,14 @@ static NSDictionary *_styles = nil;
   label.shadowColor = [PSStyleSheet shadowColorForStyle:style];
   label.shadowOffset = [PSStyleSheet shadowOffsetForStyle:style];
   label.textAlignment = [PSStyleSheet textAlignmentForStyle:style];
+}
+
++ (void)applyStyle:(NSString *)style forButton:(UIButton *)button {
+  [button setTitleColor:[PSStyleSheet textColorForStyle:style] forState:UIControlStateNormal];
+  [button setTitleColor:[PSStyleSheet highlightedTextColorForStyle:style] forState:UIControlStateHighlighted];
+  [button setTitleShadowColor:[PSStyleSheet shadowColorForStyle:style] forState:UIControlStateNormal];
+  button.titleLabel.font = [PSStyleSheet fontForStyle:style];
+  button.titleLabel.shadowOffset = [PSStyleSheet shadowOffsetForStyle:style];
 }
 
 #pragma mark - Fonts
