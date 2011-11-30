@@ -18,6 +18,7 @@
 + (UIColor *)textColorForStyle:(NSString *)style;
 + (UIColor *)highlightedTextColorForStyle:(NSString *)style;
 + (UIColor *)shadowColorForStyle:(NSString *)style;
++ (UIColor *)backgroundColorForStyle:(NSString *)style;
 + (CGSize)shadowOffsetForStyle:(NSString *)style;
 + (UITextAlignment)textAlignmentForStyle:(NSString *)style;
 

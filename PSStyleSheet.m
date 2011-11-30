@@ -39,6 +39,7 @@ static NSMutableDictionary *_styles = nil;
   label.shadowColor = [PSStyleSheet shadowColorForStyle:style];
   label.shadowOffset = [PSStyleSheet shadowOffsetForStyle:style];
   label.textAlignment = [PSStyleSheet textAlignmentForStyle:style];
+  label.backgroundColor = [PSStyleSheet backgroundColorForStyle:style];
 }
 
 + (void)applyStyle:(NSString *)style forButton:(UIButton *)button {
@@ -79,6 +80,16 @@ static NSMutableDictionary *_styles = nil;
   UIColor *color = nil;
   if ([[_styles objectForKey:style] objectForKey:@"shadowColor"]) {
     color = [UIColor colorWithHexString:[[_styles objectForKey:style] objectForKey:@"shadowColor"]];
+  }
+  return color;
+}
+
++ (UIColor *)backgroundColorForStyle:(NSString *)style {
+  UIColor *color = nil;
+  if ([[_styles objectForKey:style] objectForKey:@"backgroundColor"]) {
+    color = [UIColor colorWithHexString:[[_styles objectForKey:style] objectForKey:@"backgroundColor"]];
+  } else {
+    color = [UIColor clearColor];
   }
   return color;
 }
