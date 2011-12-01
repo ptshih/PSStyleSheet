@@ -1,6 +1,6 @@
 //
 //  PSStyleSheet.m
-//  SevenMinuteLibrary
+//  PSKit
 //
 //  Created by Peter Shih on 8/10/11.
 //  Copyright (c) 2011 Peter Shih.. All rights reserved.
