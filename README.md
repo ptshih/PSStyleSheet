@@ -1,7 +1,3 @@
-# This is a WORK IN PROGRESS
-
-### For a demo project that uses PSKit, visit http://github.com/ptshih/Rolodex
-
 PSStyleSheet
 ---
 This is a custom stylesheet driven by a plist file
