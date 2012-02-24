@@ -77,6 +77,10 @@ styles = _styles;
     if (!__defaultStyleSheet) {
         __defaultStyleSheet = [[self alloc] init];
     }
+    
+    // Make sure we have a style sheet set
+    if (!__defaultStyleSheet.styles) return nil;
+    
     return __defaultStyleSheet;
 }
 

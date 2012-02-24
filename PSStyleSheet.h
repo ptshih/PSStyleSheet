@@ -16,6 +16,10 @@
  It tries to remedy the lack of a true stylesheet (like CSS) in UIKit
  
  How to use:
+ *** First make sure you have a style sheet set. Omit the .plist extension ***
+ *** Make sure you have a style sheet called "MyStyleSheet.plist" in your app bundle ***
+ *** Now set it ASAP after app launches: [PSStyleSheet setStyleSheet:@"MyStyleSheet"]; ***
+ 
  1. UILabel *myLabel = ...
  2. [PSStyleSheet applyStyle:@"myLabelStyle" forLabel:myLabel];
  3. ???
