@@ -41,6 +41,8 @@
  */
 + (void)setStyleSheet:(NSString *)styleSheet;
 
++ (NSDictionary *)styleDictForStyle:(NSString *)style;
+
 /**
  Apply a style to a UILabel
  */

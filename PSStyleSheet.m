@@ -97,6 +97,7 @@ styles = _styles;
     [super dealloc];
 }
 
+#pragma mark - Config
 + (void)setStyleSheet:(NSString *)styleSheet {
     NSString *styleSheetPath = [[NSBundle mainBundle] pathForResource:styleSheet ofType:@"plist"];
     assert(styleSheetPath != nil);
@@ -107,8 +108,19 @@ styles = _styles;
     [[[self class] defaultStyleSheet] setStyles:styleSheetDict];
 }
 
+
++ (NSDictionary *)styleDictForStyle:(NSString *)style {
+    // Make sure there is a style sheet loaded
+    NSAssert([[self class] defaultStyleSheet].styles, @"no style sheet");
+    
+    return [[[self class] defaultStyleSheet].styles objectForKey:style];
+}
+
 #pragma mark - Applying Styles
 + (void)applyStyle:(NSString *)style forLabel:(UILabel *)label {
+    // Determine if style exists, if it doesn't, throw an assertion
+    NSAssert([[self class] styleDictForStyle:style], @"style doesn't exist");
+    
     label.font = [PSStyleSheet fontForStyle:style];
     label.textColor = [PSStyleSheet textColorForStyle:style];
     label.highlightedTextColor = [PSStyleSheet highlightedTextColorForStyle:style];
@@ -121,6 +133,9 @@ styles = _styles;
 }
 
 + (void)applyStyle:(NSString *)style forButton:(UIButton *)button {
+    // Determine if style exists, if it doesn't, throw an assertion
+    NSAssert([[self class] styleDictForStyle:style], @"style doesn't exist");
+    
     [button setTitleColor:[PSStyleSheet textColorForStyle:style] forState:UIControlStateNormal];
     [button setTitleColor:[PSStyleSheet highlightedTextColorForStyle:style] forState:UIControlStateHighlighted];
     [button setTitleShadowColor:[PSStyleSheet shadowColorForStyle:style] forState:UIControlStateNormal];
@@ -137,8 +152,8 @@ styles = _styles;
 #pragma mark - Fonts
 + (UIFont *)fontForStyle:(NSString *)style {
     UIFont *font = nil;
-    if ([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"fontName"] && [[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"fontSize"]) {
-        font = [UIFont fontWithName:[[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"fontName"] size:[[[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"fontSize"] integerValue]];
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"fontName"] && [[[self class] styleDictForStyle:style] objectForKey:@"fontSize"]) {
+        font = [UIFont fontWithName:[[[self class] styleDictForStyle:style] objectForKey:@"fontName"] size:[[[[self class] styleDictForStyle:style] objectForKey:@"fontSize"] integerValue]];
     }
     return font;
 }
@@ -146,32 +161,32 @@ styles = _styles;
 #pragma mark - Colors
 + (UIColor *)textColorForStyle:(NSString *)style {
     UIColor *color = nil;
-    if ([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"textColor"]) {
-        color = [UIColor colorWithHexString:[[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"textColor"]];
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"textColor"]) {
+        color = [UIColor colorWithHexString:[[[self class] styleDictForStyle:style] objectForKey:@"textColor"]];
     }
     return color;
 }
 
 + (UIColor *)highlightedTextColorForStyle:(NSString *)style {
     UIColor *color = nil;
-    if ([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"highlightedTextColor"]) {
-        color = [UIColor colorWithHexString:[[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"highlightedTextColor"]];
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"highlightedTextColor"]) {
+        color = [UIColor colorWithHexString:[[[self class] styleDictForStyle:style] objectForKey:@"highlightedTextColor"]];
     }
     return color;
 }
 
 + (UIColor *)shadowColorForStyle:(NSString *)style {
     UIColor *color = nil;
-    if ([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"shadowColor"]) {
-        color = [UIColor colorWithHexString:[[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"shadowColor"]];
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"shadowColor"]) {
+        color = [UIColor colorWithHexString:[[[self class] styleDictForStyle:style] objectForKey:@"shadowColor"]];
     }
     return color;
 }
 
 + (UIColor *)backgroundColorForStyle:(NSString *)style {
     UIColor *color = nil;
-    if ([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"backgroundColor"]) {
-        color = [UIColor colorWithHexString:[[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"backgroundColor"]];
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"backgroundColor"]) {
+        color = [UIColor colorWithHexString:[[[self class] styleDictForStyle:style] objectForKey:@"backgroundColor"]];
     } else {
         color = [UIColor clearColor];
     }
@@ -181,8 +196,8 @@ styles = _styles;
 #pragma mark - Offsets
 + (CGSize)shadowOffsetForStyle:(NSString *)style {
     CGSize offset = CGSizeZero;
-    if ([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"shadowOffset"]) {
-        offset = CGSizeFromString([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"shadowOffset"]);
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"shadowOffset"]) {
+        offset = CGSizeFromString([[[self class] styleDictForStyle:style] objectForKey:@"shadowOffset"]);
     }
     return offset;
 }
@@ -190,8 +205,8 @@ styles = _styles;
 #pragma mark - Text Alignment
 + (UITextAlignment)textAlignmentForStyle:(NSString *)style {
     // Defaults to UITextAlignmentLeft if undefined
-    if ([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"textAlignment"]) {
-        NSString *textAlignmentString = [[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"textAlignment"];
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"textAlignment"]) {
+        NSString *textAlignmentString = [[[self class] styleDictForStyle:style] objectForKey:@"textAlignment"];
         if ([textAlignmentString isEqualToString:@"center"]) {
             return UITextAlignmentCenter;
         } else if ([textAlignmentString isEqualToString:@"right"]) {
@@ -205,8 +220,8 @@ styles = _styles;
 #pragma mark - Number of Lines
 + (NSInteger)numberOfLinesForStyle:(NSString *)style {
     NSInteger numberOfLines = 0; // If left empty, default to 0
-    if ([[[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"numberOfLines"] integerValue]) {
-        numberOfLines = [[[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"numberOfLines"] integerValue];
+    if ([[[[self class] styleDictForStyle:style] objectForKey:@"numberOfLines"] integerValue]) {
+        numberOfLines = [[[[self class] styleDictForStyle:style] objectForKey:@"numberOfLines"] integerValue];
     }
     return numberOfLines;
 }
@@ -222,8 +237,8 @@ styles = _styles;
     //    UILineBreakModeMiddleTruncation,        // Truncate middle of line:  "ab...yz". Will truncate multiline text in the middle
     //  } UILineBreakMode;
     UILineBreakMode lineBreakMode = UILineBreakModeTailTruncation;
-    if ([[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"lineBreakMode"]) {
-        NSString *lineBreakModeString = [[[[self class] defaultStyleSheet].styles objectForKey:style] objectForKey:@"lineBreakMode"];
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"lineBreakMode"]) {
+        NSString *lineBreakModeString = [[[self class] styleDictForStyle:style] objectForKey:@"lineBreakMode"];
         if ([lineBreakModeString isEqualToString:@"wordWrap"]) {
             lineBreakMode = UILineBreakModeWordWrap;
         } else if ([lineBreakModeString isEqualToString:@"characterWrap"]) {
