@@ -19,6 +19,25 @@
 		<key>shadowOffset</key>
 		<string>{0,1}</string>
 	</dict>
+	<key>navigationTitleLabel</key>
+	<dict>
+		<key>fontName</key>
+		<string>HelveticaNeueLT-MediumCond</string>
+		<key>fontSize</key>
+		<integer>20</integer>
+		<key>textColor</key>
+		<string>0x000000</string>
+		<key>highlightedTextColor</key>
+		<string>0x000000</string>
+		<key>textAlignment</key>
+		<string>center</string>
+		<key>shadowColor</key>
+		<string>0x999999</string>
+		<key>shadowOffset</key>
+		<string>{0, 0}</string>
+		<key>numberOfLines</key>
+		<integer>5</integer>
+	</dict>
 	<key>loadMoreLabel</key>
 	<dict>
 		<key>fontName</key>
@@ -31,6 +50,32 @@
 		<string>0x000000</string>
 		<key>shadowOffset</key>
 		<string>{0,1}</string>
+	</dict>
+	<key>pullRefreshWhiteLabel</key>
+	<dict>
+		<key>fontName</key>
+		<string>HelveticaNeueLT-MediumCond</string>
+		<key>fontSize</key>
+		<integer>18</integer>
+		<key>textColor</key>
+		<string>0xefefef</string>
+		<key>shadowColor</key>
+		<string>0xefefef</string>
+		<key>shadowOffset</key>
+		<string>{0,0}</string>
+	</dict>
+	<key>pullRefreshBlackLabel</key>
+	<dict>
+		<key>fontName</key>
+		<string>HelveticaNeueLT-MediumCond</string>
+		<key>fontSize</key>
+		<integer>18</integer>
+		<key>textColor</key>
+		<string>0x000000</string>
+		<key>shadowColor</key>
+		<string>0xefefef</string>
+		<key>shadowOffset</key>
+		<string>{0,0}</string>
 	</dict>
 	<key>searchField</key>
 	<dict>
@@ -78,13 +123,13 @@
 	<key>filmViewHeader</key>
 	<dict>
 		<key>fontName</key>
-		<string>HelveticaNeue</string>
+		<string>HelveticaNeueLT-Condensed</string>
 		<key>fontSize</key>
-		<integer>14</integer>
+		<integer>16</integer>
 		<key>textColor</key>
-		<string>0xefefef</string>
+		<string>0x000000</string>
 		<key>highlightedTextColor</key>
-		<string>0xefefef</string>
+		<string>0x000000</string>
 		<key>textAlignment</key>
 		<string>center</string>
 		<key>shadowColor</key>
@@ -95,19 +140,36 @@
 	<key>filmViewFooter</key>
 	<dict>
 		<key>fontName</key>
-		<string>HelveticaNeue</string>
+		<string>HelveticaNeueLT-Condensed</string>
 		<key>fontSize</key>
-		<integer>14</integer>
+		<integer>16</integer>
 		<key>textColor</key>
-		<string>0xefefef</string>
+		<string>0x000000</string>
 		<key>highlightedTextColor</key>
-		<string>0xefefef</string>
+		<string>0x000000</string>
 		<key>textAlignment</key>
 		<string>center</string>
 		<key>shadowColor</key>
 		<string>0x000000</string>
 		<key>shadowOffset</key>
 		<string>{0,0}</string>
+	</dict>
+	<key>popoverTitleLabel</key>
+	<dict>
+		<key>fontName</key>
+		<string>HelveticaNeueLT-MediumCond</string>
+		<key>fontSize</key>
+		<integer>18</integer>
+		<key>textColor</key>
+		<string>0xefefef</string>
+		<key>shadowColor</key>
+		<string>0xefefef</string>
+		<key>shadowOffset</key>
+		<string>{0,0}</string>
+		<key>textAlignment</key>
+		<string>center</string>
+		<key>numberOfLines</key>
+		<integer>1</integer>
 	</dict>
 </dict>
 </plist>
