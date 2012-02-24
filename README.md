@@ -2,6 +2,28 @@ PSStyleSheet
 ---
 This is a custom stylesheet driven by a plist file
 
+PSStyleSheet is a plist driven label/button configuration class
+It tries to remedy the lack of a true stylesheet (like CSS) in UIKit
+
+How to use:
+*** First make sure you have a style sheet set. Omit the .plist extension ***
+*** Make sure you have a style sheet called "MyStyleSheet.plist" in your app bundle ***
+*** Now set it ASAP after app launches: [PSStyleSheet setStyleSheet:@"MyStyleSheet"]; ***
+
+1. UILabel *myLabel = ...
+2. [PSStyleSheet applyStyle:@"myLabelStyle" forLabel:myLabel];
+3. ???
+4. Profit!
+
+1. UIButton *myButton = ...
+2. [PSStyleSheet applyStyle:@"myButtonStyle" forButton:myButton];
+3. ???
+4. Profit!
+
+Future enhancements:
+- CSS to PLIST conversion script
+- Automated stylesheet updating by detecting when the stylesheet file is changed
+
 LICENSE
 ---
 Copyright (C) 2011 Peter Shih. All rights reserved.
