@@ -119,7 +119,7 @@ styles = _styles;
 #pragma mark - Applying Styles
 + (void)applyStyle:(NSString *)style forLabel:(UILabel *)label {
     // Determine if style exists, if it doesn't, throw an assertion
-    NSAssert([[self class] styleDictForStyle:style], @"style doesn't exist");
+    NSAssert1([[self class] styleDictForStyle:style], @"style: %@ does not exist", style);
     
     label.font = [PSStyleSheet fontForStyle:style];
     label.textColor = [PSStyleSheet textColorForStyle:style];
@@ -134,7 +134,7 @@ styles = _styles;
 
 + (void)applyStyle:(NSString *)style forButton:(UIButton *)button {
     // Determine if style exists, if it doesn't, throw an assertion
-    NSAssert([[self class] styleDictForStyle:style], @"style doesn't exist");
+    NSAssert1([[self class] styleDictForStyle:style], @"style: %@ does not exist", style);
     
     [button setTitleColor:[PSStyleSheet textColorForStyle:style] forState:UIControlStateNormal];
     [button setTitleColor:[PSStyleSheet highlightedTextColorForStyle:style] forState:UIControlStateHighlighted];
