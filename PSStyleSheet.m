@@ -41,13 +41,12 @@ static PSStyleSheet *__defaultStyleSheet = nil;
 
 @end
 
-@interface UILabel (PSStyleSheet)
+@interface UILabel (PSStyleSheet_Private)
 
 + (CGSize)sizeForText:(NSString*)text width:(CGFloat)width font:(UIFont*)font numberOfLines:(NSInteger)numberOfLines lineBreakMode:(UILineBreakMode)lineBreakMode;
-
 @end
 
-@implementation UILabel (PSStyleSheet)
+@implementation UILabel (PSStyleSheet_Private)
 
 + (CGSize)sizeForText:(NSString*)text width:(CGFloat)width font:(UIFont*)font numberOfLines:(NSInteger)numberOfLines lineBreakMode:(UILineBreakMode)lineBreakMode {
     
@@ -55,6 +54,16 @@ static PSStyleSheet *__defaultStyleSheet = nil;
     
     CGFloat lineHeight = [@"A" sizeWithFont:font].height;
     return [text sizeWithFont:font constrainedToSize:CGSizeMake(width, numberOfLines*lineHeight) lineBreakMode:lineBreakMode];
+}
+
+@end
+
+@implementation UILabel (PSStyleSheet)
+
++ (UILabel *)labelWithStyle:(NSString *)style {
+    UILabel *l = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+    [PSStyleSheet applyStyle:style forLabel:l];
+    return l;
 }
 
 @end
