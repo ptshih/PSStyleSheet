@@ -152,6 +152,15 @@ styles = _styles;
     button.titleLabel.shadowOffset = [PSStyleSheet shadowOffsetForStyle:style];
 }
 
++ (void)applyStyle:(NSString *)style forTextField:(UITextField *)textField {
+    // Determine if style exists, if it doesn't, throw an assertion
+    NSAssert1([[self class] styleDictForStyle:style], @"style: %@ does not exist", style);
+    
+    [textField setTextColor:[PSStyleSheet textColorForStyle:style]];
+    [textField setFont:[PSStyleSheet fontForStyle:style]];
+    [textField setTextAlignment:[PSStyleSheet textAlignmentForStyle:style]];
+}
+
 #pragma mark - Size calculation
 + (CGSize)sizeForText:(NSString *)text width:(CGFloat)width style:(NSString *)style {
     CGSize size = [UILabel sizeForText:text width:width font:[[self class] fontForStyle:style] numberOfLines:[[self class] numberOfLinesForStyle:style] lineBreakMode:[[self class] lineBreakModeForStyle:style]];

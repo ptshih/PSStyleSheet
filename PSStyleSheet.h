@@ -60,6 +60,11 @@
 + (void)applyStyle:(NSString *)style forButton:(UIButton *)button;
 
 /**
+ Appy a style to a UITextField
+ */
++ (void)applyStyle:(NSString *)style forTextField:(UITextField *)textField;
+
+/**
  Calculate the size required for a string of text bounded by a width given a style.
  Note: this is useful in table view dynamic row height calculations
 */
