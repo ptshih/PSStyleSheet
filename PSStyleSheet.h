@@ -80,6 +80,7 @@
 + (UIColor *)backgroundColorForStyle:(NSString *)style;
 + (CGSize)shadowOffsetForStyle:(NSString *)style;
 + (UITextAlignment)textAlignmentForStyle:(NSString *)style;
++ (UIControlContentHorizontalAlignment)horizontalAlignmentForStyle:(NSString *)style;
 + (NSInteger)numberOfLinesForStyle:(NSString *)style;
 + (UILineBreakMode)lineBreakModeForStyle:(NSString *)style;
 

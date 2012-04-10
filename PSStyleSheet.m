@@ -150,6 +150,7 @@ styles = _styles;
     [button setTitleShadowColor:[PSStyleSheet shadowColorForStyle:style] forState:UIControlStateNormal];
     button.titleLabel.font = [PSStyleSheet fontForStyle:style];
     button.titleLabel.shadowOffset = [PSStyleSheet shadowOffsetForStyle:style];
+    button.contentHorizontalAlignment = [PSStyleSheet horizontalAlignmentForStyle:style];
 }
 
 + (void)applyStyle:(NSString *)style forTextField:(UITextField *)textField {
@@ -232,6 +233,20 @@ styles = _styles;
         } else return UITextAlignmentLeft;
     } else {
         return UITextAlignmentLeft;
+    }
+}
+
++ (UIControlContentHorizontalAlignment)horizontalAlignmentForStyle:(NSString *)style {
+    // Defaults to CENTER if undefined
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"textAlignment"]) {
+        NSString *textAlignmentString = [[[self class] styleDictForStyle:style] objectForKey:@"textAlignment"];
+        if ([textAlignmentString isEqualToString:@"center"]) {
+            return UIControlContentHorizontalAlignmentCenter;
+        } else if ([textAlignmentString isEqualToString:@"right"]) {
+            return  UIControlContentHorizontalAlignmentRight;
+        } else return UIControlContentHorizontalAlignmentLeft;
+    } else {
+        return UIControlContentHorizontalAlignmentCenter;
     }
 }
 
