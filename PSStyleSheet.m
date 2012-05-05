@@ -61,7 +61,7 @@ static PSStyleSheet *__defaultStyleSheet = nil;
 @implementation UILabel (PSStyleSheet)
 
 + (UILabel *)labelWithStyle:(NSString *)style {
-    UILabel *l = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+    UILabel *l = [[UILabel alloc] initWithFrame:CGRectZero];
     [PSStyleSheet applyStyle:style forLabel:l];
     return l;
 }
@@ -73,7 +73,7 @@ static PSStyleSheet *__defaultStyleSheet = nil;
 
 + (PSStyleSheet *)defaultStyleSheet;
 
-@property (nonatomic, retain) NSMutableDictionary *styles;
+@property (nonatomic, strong) NSMutableDictionary *styles;
 
 @end
 
@@ -101,10 +101,6 @@ styles = _styles;
     return self;
 }
 
-- (void)dealloc {
-    self.styles = nil;
-    [super dealloc];
-}
 
 #pragma mark - Config
 + (void)setStyleSheet:(NSString *)styleSheet {
