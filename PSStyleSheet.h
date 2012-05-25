@@ -74,6 +74,7 @@
  Below are individual components of a "Style", might make this private in the future
  */
 + (UIFont *)fontForStyle:(NSString *)style;
++ (CGFloat)minimumFontSizeForStyle:(NSString *)style;
 + (UIColor *)textColorForStyle:(NSString *)style;
 + (UIColor *)highlightedTextColorForStyle:(NSString *)style;
 + (UIColor *)shadowColorForStyle:(NSString *)style;
@@ -83,5 +84,6 @@
 + (UIControlContentHorizontalAlignment)horizontalAlignmentForStyle:(NSString *)style;
 + (NSInteger)numberOfLinesForStyle:(NSString *)style;
 + (UILineBreakMode)lineBreakModeForStyle:(NSString *)style;
++ (BOOL)adjustsFontSizeToFitWidthForStyle:(NSString *)style;
 
 @end

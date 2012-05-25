@@ -127,6 +127,7 @@ styles = _styles;
     NSAssert1([[self class] styleDictForStyle:style], @"style: %@ does not exist", style);
     
     label.font = [PSStyleSheet fontForStyle:style];
+    label.minimumFontSize = [PSStyleSheet minimumFontSizeForStyle:style];
     label.textColor = [PSStyleSheet textColorForStyle:style];
     label.highlightedTextColor = [PSStyleSheet highlightedTextColorForStyle:style];
     label.shadowColor = [PSStyleSheet shadowColorForStyle:style];
@@ -135,6 +136,7 @@ styles = _styles;
     label.backgroundColor = [PSStyleSheet backgroundColorForStyle:style];
     label.numberOfLines = [PSStyleSheet numberOfLinesForStyle:style];
     label.lineBreakMode = [PSStyleSheet lineBreakModeForStyle:style];
+    label.adjustsFontSizeToFitWidth = [PSStyleSheet adjustsFontSizeToFitWidthForStyle:style];
 }
 
 + (void)applyStyle:(NSString *)style forButton:(UIButton *)button {
@@ -145,6 +147,8 @@ styles = _styles;
     [button setTitleColor:[PSStyleSheet highlightedTextColorForStyle:style] forState:UIControlStateHighlighted];
     [button setTitleShadowColor:[PSStyleSheet shadowColorForStyle:style] forState:UIControlStateNormal];
     button.titleLabel.font = [PSStyleSheet fontForStyle:style];
+    button.titleLabel.minimumFontSize = [PSStyleSheet minimumFontSizeForStyle:style];
+    button.titleLabel.adjustsFontSizeToFitWidth = [PSStyleSheet adjustsFontSizeToFitWidthForStyle:style];
     button.titleLabel.shadowOffset = [PSStyleSheet shadowOffsetForStyle:style];
     button.contentHorizontalAlignment = [PSStyleSheet horizontalAlignmentForStyle:style];
 }
@@ -171,6 +175,14 @@ styles = _styles;
         font = [UIFont fontWithName:[[[self class] styleDictForStyle:style] objectForKey:@"fontName"] size:[[[[self class] styleDictForStyle:style] objectForKey:@"fontSize"] integerValue]];
     }
     return font;
+}
+
++ (CGFloat)minimumFontSizeForStyle:(NSString *)style {
+    CGFloat minimumFontSize = 0.0;
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"minimumFontSize"]) {
+        minimumFontSize = [[[[self class] styleDictForStyle:style] objectForKey:@"minimumFontSize"] floatValue];
+    }
+    return minimumFontSize;
 }
 
 #pragma mark - Colors
@@ -277,6 +289,14 @@ styles = _styles;
         }
     }
     return lineBreakMode;
+}
+
++ (BOOL)adjustsFontSizeToFitWidthForStyle:(NSString *)style {
+    BOOL adjustsFontSizeToFitWidth = NO;
+    if ([[[self class] styleDictForStyle:style] objectForKey:@"adjustsFontSizeToFitWidth"]) {
+        adjustsFontSizeToFitWidth = [[[[self class] styleDictForStyle:style] objectForKey:@"adjustsFontSizeToFitWidth"] boolValue];
+    }
+    return adjustsFontSizeToFitWidth;
 }
 
 @end
