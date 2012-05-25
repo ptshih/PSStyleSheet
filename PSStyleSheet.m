@@ -53,7 +53,7 @@ static PSStyleSheet *__defaultStyleSheet = nil;
     if (numberOfLines == 0) numberOfLines = INT_MAX;
     
     CGFloat lineHeight = [@"A" sizeWithFont:font].height;
-    return [text sizeWithFont:font constrainedToSize:CGSizeMake(width, numberOfLines*lineHeight) lineBreakMode:lineBreakMode];
+    return [text sizeWithFont:font constrainedToSize:CGSizeMake(width, numberOfLines * lineHeight) lineBreakMode:lineBreakMode];
 }
 
 @end
