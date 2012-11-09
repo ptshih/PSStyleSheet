@@ -79,9 +79,6 @@ static PSStyleSheet *__defaultStyleSheet = nil;
 
 @implementation PSStyleSheet
 
-@synthesize
-styles = _styles;
-
 + (PSStyleSheet *)defaultStyleSheet {
     if (!__defaultStyleSheet) {
         __defaultStyleSheet = [[self alloc] init];
